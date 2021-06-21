@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>PHPJabbers.com | Free Book Online Store Website Template</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../static/assets/css/main.css" />
+        <link href="../static/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+		<noscript><link rel="stylesheet" href="../static/assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="/shop/index" class="logo">
+									<span class="fa fa-book"></span> <span class="title">BoEC Store Online</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="/shop/index" class="active">Home</a></li>
+
+							<li><a href="/shop/product_list">Products</a></li>
+
+							<li><a href="/shop/checkout">Checkout</a></li>
+
+							<li><a href="contact.html">Contact Us</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Checkout</h1>
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Remove</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for x in product %}
+                                <tr>
+                                  <th scope="row">{{ x.pos }}</th>
+                                  <td>{{ x.productid.name }}</td>
+                                  <td><img height="100px" width="100px" src="{{ x.productid.image }}"></td>
+                                  <td>{{ x.productType }}</td>
+                                  <td>${{ x.productid.price }}</td>
+                                  <td>{{ x.quantity}}</td>
+                                  <td><a href="/shop/remove_from_cart/{{ x.productid.id }}"><i class="fas fa-trash-alt"></i></a></td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                            <h2>Total: ${{ cart.total }}</h2>
+						</div>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<section>
+								<form method="post" action="../shop/checkout">
+                                    {% csrf_token %}
+									<div class="fields">
+
+										<div class="field half">
+											<input readonly value="{{ customer.fullnameid.firstname }} {{ customer.fullnameid.lastname }}" type="text" name="customerName" id="field-2" placeholder="Name">
+										</div>
+
+										<div class="field half">
+											<input readonly value="{{ customer.tel }}" type="text" name="Customer Tel" id="field-4" placeholder="Phone">
+										</div>
+
+										<div class="field half">
+											<input readonly value="{{ address.no }}, {{ address.street }}, {{ address.district }}" type="text" name="address" id="field-5" placeholder="Address">
+										</div>
+
+										<div class="field half">
+											<input readonly value="{{ address.city }}" type="text" name="city" id="field-7" placeholder="City">
+										</div>
+
+
+										<div class="field half">
+											<select name="shipment">
+		                                       <option value="">Shipment</option>
+		                                       <option value="J&T Express">J&T Express</option>
+		                                       <option value="ShoppeExpress">ShopeeExpress</option>
+		                                       <option value="GiaoHangTietKiem">GiaoHangTietKiem</option>
+											</select>
+										</div>
+
+										<div class="field half">
+											<select name = "payMethod">
+		                                       <option value="">Payment method</option>
+		                                       <option value="Credits Card">Credits Card</option>
+		                                       <option value="ATM Card">ATM Card</option>
+		                                       <option value="AirPay">AirPay</option>
+                                                <option value="VNPay">VNPay</option>
+											</select>
+										</div>
+
+										<div class="field text-right">
+											<ul class="actions">
+												<li><input type="submit" value="Checkout" class="primary"></li>
+											</ul>
+										</div>
+									</div>
+								</form>
+							</section>
+							<section>
+								<h2>Contact Info</h2>
+
+								<ul class="alt">
+									<li><span class="fa fa-envelope-o"></span> <a href="#">duong98it@gmail.com</a></li>
+									<li><span class="fa fa-phone"></span>0355970126</li>
+									<li><span class="fa fa-map-pin"></span> Học Viện Công Nghệ Bưu Chính Viễn Thông ,Km 10000 Nguyễn Trãi ,Hà Đông ,Hà Nội</li>
+								</ul>
+
+								<h2>Follow Us</h2>
+
+								<ul class="icons">
+									<li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>
+								</ul>
+							</section>
+
+
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../static/assets/js/jquery.min.js"></script>
+			<script src="../static/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+			<script src="../static/assets/js/jquery.scrolly.min.js"></script>
+			<script src="../static/assets/js/jquery.scrollex.min.js"></script>
+			<script src="../static/assets/js/main.js"></script>
+	</body>
+</html>							
